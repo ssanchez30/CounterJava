@@ -1,5 +1,7 @@
 package com.sergio.controllers;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -76,17 +78,28 @@ public class CounterController {
 		
 	}
 	
-	@RequestMapping(value="/prefCounterFrm", method=RequestMethod.POST)
-	public String addPref(@RequestParam(value="increaseNumber")int increaseNumber, HttpSession session, Model model) {
+	@RequestMapping(value="/prefCounterFrm", method=RequestMethod.GET)
+	public String addPref(@RequestParam(value="increaseNumber", required=false)String increaseNumber, HttpSession session, Model model) {
+
+		int intValue=0;
+		
+		if ( increaseNumber == "") {
+			intValue =0;
+		}else {
+			intValue = Integer.parseInt(increaseNumber);
+		}
+		
 		Object sessionContador = session.getAttribute("contador");
 
+		
+		
 		if (sessionContador == null) {
 			session.setAttribute("contador", 0);
 			session.setAttribute("texto", "times");
 			model.addAttribute("contador", session.getAttribute("contador"));
 			model.addAttribute("texto", session.getAttribute("texto"));
 		} else {
-			session.setAttribute("contador", ((int) session.getAttribute("contador") + increaseNumber-1));
+			session.setAttribute("contador", ((int) session.getAttribute("contador") + intValue-1));
 			
 			
 				session.setAttribute("texto", "times");

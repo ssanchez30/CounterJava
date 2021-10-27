@@ -41,7 +41,7 @@
 
 	<div class="prefCounter d-flex flex-row justify-content-center mt-5">
 		
-		<form action="/prefCounterFrm" method="POST">
+		<form action="/prefCounterFrm" method="GET">
 			<label for="increaseNumber">Increase by:</label> <input type="number"
 				id="increaseNumber" name="increaseNumber">
 			<button type="submit" class="btn btn-primary btn-sm btnIncrease">Increase!</button>
